@@ -1,12 +1,23 @@
 package com.papb.lk2praktikum
 
+import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -15,10 +26,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,6 +45,14 @@ fun Tampilan(){
     }
 
     var inputTeks by remember{
+        mutableStateOf("")
+    }
+
+    var teks2 by remember{
+        mutableStateOf("")
+    }
+
+    var inputTeks2 by remember{
         mutableStateOf("")
     }
 
@@ -49,19 +70,41 @@ fun Tampilan(){
         Spacer(modifier = Modifier.height(19.dp))
 
         OutlinedTextField(value = inputTeks, onValueChange = {inputTeks = it}, textStyle = TextStyle(color = Color.Magenta), label = {
-            Text(text = "Text Bebas Anda")
+            Row(horizontalArrangement = Arrangement.Center) {
+                Image(
+                    imageVector = Icons.Filled.Person,
+                    contentDescription = "icon nama",
+                    modifier = Modifier.size(25.dp)
+                )
+                Text(text = "Text Bebas Anda")
+            }
+        })
+
+        OutlinedTextField(keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),value = inputTeks2, onValueChange = {inputTeks2 = it}, textStyle = TextStyle(color = Color.Magenta), label = {
+            Row(horizontalArrangement = Arrangement.Center) {
+                Image(
+                    imageVector = Icons.Filled.Lock,
+                    contentDescription = "icon kunci",
+                    modifier = Modifier.size(25.dp)
+                )
+                Text(text = "Bebas tapi cuma angka")
+            }
         })
 
 
         Spacer(modifier = Modifier.height(18.dp))
 
-        Button(onClick = {teks = inputTeks}) {
+        Button(onClick = {teks = inputTeks; teks2 = inputTeks2}) {
             Text(text = "Submit", fontSize = 20.sp, fontFamily = FontFamily.SansSerif)
         }
 
         Spacer(modifier = Modifier.height(18.dp))
 
         Text(text = teks)
+
+        Spacer(modifier = Modifier.height(18.dp))
+
+        Text(text = teks2)
     }
 }
 
