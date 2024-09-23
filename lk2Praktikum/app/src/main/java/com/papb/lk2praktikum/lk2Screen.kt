@@ -1,7 +1,12 @@
 package com.papb.lk2praktikum
 
 import android.inputmethodservice.Keyboard
+import android.widget.Toast
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +24,8 @@ import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +34,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -37,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.papb.lk2praktikum.ui.theme.Lk2PraktikumTheme
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Tampilan(){
 
@@ -55,6 +65,9 @@ fun Tampilan(){
     var inputTeks2 by remember{
         mutableStateOf("")
     }
+
+    val isFormFilled = inputTeks.isNotEmpty() && inputTeks2.isNotEmpty()
+    var context = LocalContext.current
 
     Column (
         modifier = Modifier.fillMaxSize(),
@@ -94,9 +107,24 @@ fun Tampilan(){
 
         Spacer(modifier = Modifier.height(18.dp))
 
-        Button(onClick = {teks = inputTeks; teks2 = inputTeks2}) {
-            Text(text = "Submit", fontSize = 20.sp, fontFamily = FontFamily.SansSerif)
+        Button(
+            onClick = {teks = inputTeks; teks2 = inputTeks2},
+            enabled = isFormFilled,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (isFormFilled) Color.Blue else Color.DarkGray
+            )
+        ) {
+            Text(modifier = Modifier
+                .combinedClickable(
+                    onClick = {teks = inputTeks; teks2 = inputTeks2},
+                    onLongClick = {
+                        Toast.makeText(context, "Nama: $inputTeks\nNIM: $inputTeks2", Toast.LENGTH_SHORT).show()
+                    },
+                    enabled = isFormFilled
+                ),
+                text = "Submit", fontSize = 20.sp, fontFamily = FontFamily.SansSerif, color = if (isFormFilled) Color.White else Color.DarkGray)
         }
+
 
         Spacer(modifier = Modifier.height(18.dp))
 
