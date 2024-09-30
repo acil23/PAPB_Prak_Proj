@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "487933245986",
+    "project_id": "restaurant-app-a4e01",
+    "storage_bucket": "restaurant-app-a4e01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487933245986:android:5fda0d844c28b89be6687b",
+        "android_client_info": {
+          "package_name": "com.papb.restarurantsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4ZHW7V0QlVIFcnUCG2ukojgJvOg6M7JU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

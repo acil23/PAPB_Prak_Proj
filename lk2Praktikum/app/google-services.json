@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "682459359274",
+    "project_id": "lkpraktikum-b910c",
+    "storage_bucket": "lkpraktikum-b910c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682459359274:android:47489ef8660702695ebb53",
+        "android_client_info": {
+          "package_name": "com.papb.lk2praktikum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh9pHtbpZ5ugaGkNugs1_lLzCAvyikrrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
