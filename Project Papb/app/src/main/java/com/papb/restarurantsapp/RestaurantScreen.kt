@@ -28,6 +28,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -50,15 +52,10 @@ import com.papb.restarurantsapp.ui.theme.RestarurantsAppTheme
 
 @Composable
 fun RestaurantScreen() {
-    // Membuat background gradien
-    val gradientBackground = Brush.linearGradient(
-        colors = listOf(
-            Color(0xFF42A5F5),
-            Color(0xFF4CAF50)
-        )
-    )
-
     val viewModel: RestaurantsViewModel = viewModel()
+    LaunchedEffect(key1 = "request_restaurants") {
+        viewModel.getRestaurants()
+    }
 
     Box(
         modifier = Modifier.fillMaxSize() // Mengisi seluruh layar
@@ -87,8 +84,9 @@ fun RestaurantScreen() {
                     horizontal = 8.dp
                 )
             ) {
-                items(viewModel.getRestaurants()) { restaurant ->
-                    RestaurantItem(restaurant)
+                items(viewModel.state.value) { restaurant ->
+                    RestaurantItem(restaurant) { id -> viewModel.toggleFavorite(id)
+                    }
                 }
             }
         }
@@ -140,9 +138,15 @@ fun NamaApp() {
 }
 
 @Composable
-fun RestaurantItem(item: Restaurant) {
+fun RestaurantItem(item: Restaurant, onClick: (id: Int) -> Unit) {
     val gradient = Brush.linearGradient(colors = listOf(Color(0xFF1c92d2), Color(0xFFf2fcfe))
     )
+    val favoriteState = remember {
+        mutableStateOf(false) }
+    val icon = if (item.isFavorite)
+        Icons.Filled.Favorite
+    else
+        Icons.Filled.FavoriteBorder
     Card(elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier.padding(8.dp)
     ) {
@@ -157,37 +161,33 @@ fun RestaurantItem(item: Restaurant) {
                 item.title,
                 item.description,
                 Modifier.weight(0.85f))
-                FavoriteIcon(Modifier.weight(0.15f))
+            RestaurantIcon(icon, Modifier.weight(0.15f)){
+                onClick(item.id)
+            }
         }
     }
 }
 
 @Composable
-private fun FavoriteIcon(modifier: Modifier) {
-    val favoriteState = remember {
-        mutableStateOf(false) }
-    val icon = if (favoriteState.value)
-        Icons.Filled.Favorite
-    else
-        Icons.Filled.FavoriteBorder
-
+private fun FavoriteIcon(icon: ImageVector,
+                         modifier: Modifier,
+                         onClick: () -> Unit) {
     Image(
         imageVector = icon,
         contentDescription = "Favorite restaurant icon",
         modifier = modifier
             .padding(8.dp)
-            .clickable { favoriteState.value =
-                !favoriteState.value
-            }
+            .clickable { onClick() }
     )
 }
 
 @Composable
-private fun RestaurantIcon(icon: ImageVector, modifier: Modifier) {
+private fun RestaurantIcon(icon: ImageVector, modifier: Modifier, onClick: () -> Unit = { }) {
     Image(
         imageVector = icon,
         contentDescription = "Restaurant icon",
         modifier = modifier.padding(8.dp)
+            .clickable{onClick()}
     )
 }
 

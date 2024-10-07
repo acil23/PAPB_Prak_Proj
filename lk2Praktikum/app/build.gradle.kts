@@ -19,6 +19,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+//        buildConfigField("String", "BASE_URL_GITHUB", "\"https://api.github.com/\"")
+//        buildConfigField("String","API_KEY", "\"github_pat_OwZT7zx9H5dFrBe54NnolUV5UKKgfc3gj0ZV\"")
     }
 
     buildTypes {
@@ -80,5 +82,9 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation(libs.firebase.auth.ktx)
     implementation (libs.firebase.firestore.ktx)
+    implementation(libs.retrofit)
+    implementation(libs.gson.converter)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.coil.compose)
 
 }
