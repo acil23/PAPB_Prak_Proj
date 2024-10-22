@@ -8,7 +8,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.google.firebase.auth.FirebaseAuth
 import com.papb.lk2praktikum.ui.theme.Lk2PraktikumTheme
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 class MainActivity : ComponentActivity() {
@@ -41,7 +40,7 @@ class MainActivity : ComponentActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Login successful
-                        val intent = Intent(this, ListActivity::class.java)
+                        val intent = Intent(this, Main::class.java)
                         startActivity(intent)
                         finish()
                         Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()

@@ -86,5 +86,6 @@ dependencies {
     implementation(libs.gson.converter)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.navigation.compose)
 
 }

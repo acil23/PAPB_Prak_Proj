@@ -20,6 +20,7 @@ firebaseFirestoreKtx = "25.1.0"
 retrofit = "2.9.0"
 okhttp-logging-interceptor = "4.9.3"
 gson-converter = "2.9.0"
+navigation_compose = "2.8.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +49,7 @@ firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-fires
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "gson-converter" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp-logging-interceptor" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation_compose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
