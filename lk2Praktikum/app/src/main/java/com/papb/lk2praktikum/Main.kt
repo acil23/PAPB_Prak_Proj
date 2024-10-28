@@ -1,13 +1,12 @@
 package com.papb.lk2praktikum
 
+import android.app.Application
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
@@ -21,7 +20,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -33,6 +34,8 @@ import com.papb.lk2praktikum.navigation.Screen
 import com.papb.lk2praktikum.screen.MatkulScreen
 import com.papb.lk2praktikum.screen.ProfileScreen
 import com.papb.lk2praktikum.screen.TugasScreen
+import com.papb.lk2praktikum.viewmodel.TugasViewModel
+import com.papb.lk2praktikum.viewmodel.TugasViewModelFactory
 
 class Main: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +64,12 @@ fun MainContent(
                 MatkulScreen()
             }
             composable(Screen.Tugas.route) {
-                TugasScreen()
+                val tugasViewModel: TugasViewModel = viewModel(
+                    factory = TugasViewModelFactory(LocalContext.current.applicationContext as Application)
+                )
+                TugasScreen(viewModel = tugasViewModel)
             }
+
             composable(Screen.Profil.route) {
                 ProfileScreen()
             }
